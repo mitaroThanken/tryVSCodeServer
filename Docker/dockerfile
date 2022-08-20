@@ -18,6 +18,7 @@ RUN chmod +x /docker-entrypoint.sh
 USER ${USERNAME}
 WORKDIR ${WORKDIR}
 
+EXPOSE 8000
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 #CMD [ "sleep", "infinity" ]
 CMD [ "code-server", "serve-local", "--accept-server-license-terms", "--host", "0.0.0.0" ]
