@@ -6,6 +6,11 @@ RUN chmod +x /install-packages.sh \
  && /install-packages.sh \
  && rm /install-packages.sh
 
+COPY locale.sh /
+RUN chmod +x /locale.sh \
+ && /locale.sh \
+ && rm /locale.sh
+
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
