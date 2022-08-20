@@ -10,6 +10,8 @@ COPY common.sh /
 RUN bash /common.sh "${USERNAME}" "${USER_UID}" "${USER_GID}" \
  && rm /common.sh
 
+RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | USER=root sh
+
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
