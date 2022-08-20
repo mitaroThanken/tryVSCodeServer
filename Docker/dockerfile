@@ -1,17 +1,20 @@
 ARG VARIANT="bullseye"
 FROM buildpack-deps:${VARIANT}-curl
 
-COPY install-packages.sh /
-RUN chmod +x /install-packages.sh \
- && /install-packages.sh \
- && rm /install-packages.sh
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=${USER_UID}
+ARG WORKDIR="/home/${USERNAME}"
 
-COPY locale.sh /
-RUN chmod +x /locale.sh \
- && /locale.sh \
- && rm /locale.sh
+COPY common.sh /
+RUN bash /common.sh "${USERNAME}" "${USER_UID}" "${USER_GID}" \
+ && rm /common.sh
 
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
+
+USER ${USERNAME}
+WORKDIR ${WORKDIR}
+
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 CMD [ "sleep", "infinity" ]
