@@ -1,0 +1,7 @@
+ARG VARIANT="bullseye"
+FROM buildpack-deps:${VARIANT}-curl
+
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+CMD [ "sleep", "infinity" ]
