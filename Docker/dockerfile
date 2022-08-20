@@ -19,4 +19,5 @@ USER ${USERNAME}
 WORKDIR ${WORKDIR}
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
-CMD [ "sleep", "infinity" ]
+#CMD [ "sleep", "infinity" ]
+CMD [ "code-server", "serve-local", "--accept-server-license-terms", "--host", "0.0.0.0" ]
