@@ -1,6 +1,11 @@
 ARG VARIANT="bullseye"
 FROM buildpack-deps:${VARIANT}-curl
 
+COPY install-packages.sh /
+RUN chmod +x /install-packages.sh \
+ && /install-packages.sh \
+ && rm /install-packages.sh
+
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
